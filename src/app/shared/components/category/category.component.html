@@ -1,0 +1,14 @@
+<section class="category-section">
+  <div class="container">
+    <div class="category-list">
+      @for (category of categories; track category.name) {
+        <a [routerLink]="category.link" class="category-card">
+          <div class="category-image">
+            <img [src]="category.image" [alt]="category.name">
+          </div>
+          <h3>{{ category.name }}</h3>
+        </a>
+      }
+    </div>
+  </div>
+</section>

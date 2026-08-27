@@ -4,11 +4,6 @@
     padding: 65px 0 0;
 }
 
-.container {
-    width: min(1200px, calc(100% - 40px));
-    margin: 0 auto;
-}
-
 .footer-top {
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr 1.3fr;

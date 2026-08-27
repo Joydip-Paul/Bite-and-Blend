@@ -10,11 +10,11 @@ import { RouterLink } from '@angular/router';
 })
 export class CategoryComponent {
   categories = [
-    { name: 'Juice', image: 'assets/img/categories/juice.jpg', link: '/menu/juice' },
-    { name: 'Burger', image: 'assets/img/categories/burger.jpg', link: '/menu/burger' },
-    { name: 'Combo Meal', image: 'assets/img/categories/combo-meal.jpg', link: '/menu/combo-meal' },
-    { name: 'Sandwich', image: 'assets/img/categories/sandwich.jpg', link: '/menu/sandwich' },
-    { name: 'Momo', image: 'assets/img/categories/momo.jpg', link: '/menu/momo' },
-    { name: 'Snacks', image: 'assets/img/categories/snacks.jpg', link: '/menu/snacks' },
+    { name: 'Juice', image: 'assets/icons/cat-juice.png', link: '/menu/juice' },
+    { name: 'Burger', image: 'assets/icons/cat-juice.png', link: '/menu/burger' },
+    { name: 'Combo Meal', image: 'assets/icons/cat-juice.png', link: '/menu/combo-meal' },
+    { name: 'Sandwich', image: 'assets/icons/cat-juice.png', link: '/menu/sandwich' },
+    { name: 'Momo', image: 'assets/icons/cat-juice.png', link: '/menu/momo' },
+    { name: 'Snacks', image: 'assets/icons/cat-juice.png', link: '/menu/snacks' },
   ];
 }

@@ -1,1 +1,71 @@
-<p>order works!</p>
+<section class="order-page">
+  <div class="container">
+    <div class="order-heading">
+      <span>Almost there</span>
+      <h1>Complete your order</h1>
+      <p>Share your delivery details and we’ll prepare everything fresh.</p>
+    </div>
+
+    @if (cartService.items().length) {
+      <div class="checkout-layout">
+        <div class="form-card">
+          <div class="card-title"><i>01</i><div><span>Customer details</span><h2>Where should we deliver?</h2></div></div>
+
+          @if (submitted && orderForm.valid) {
+            <div class="success-message" role="status">
+              <span>✓</span>
+              <div><strong>Order information submitted!</strong><p>Your complete order data is available in the browser console.</p></div>
+            </div>
+          }
+
+          <form [formGroup]="orderForm" (ngSubmit)="submitOrder()" novalidate>
+            <div class="field-row">
+              <label>
+                <span>Your name</span>
+                <input type="text" formControlName="name" placeholder="Enter your full name" autocomplete="name">
+                @if (orderForm.controls.name.touched && orderForm.controls.name.invalid) { <small>Please enter at least 2 characters.</small> }
+              </label>
+              <label>
+                <span>Phone number</span>
+                <input type="tel" formControlName="phone" placeholder="01XXXXXXXXX" autocomplete="tel">
+                @if (orderForm.controls.phone.touched && orderForm.controls.phone.invalid) { <small>Enter a valid Bangladeshi mobile number.</small> }
+              </label>
+            </div>
+
+            <label>
+              <span>Delivery address</span>
+              <textarea formControlName="address" rows="5" placeholder="House, road, area and helpful delivery notes" autocomplete="street-address"></textarea>
+              @if (orderForm.controls.address.touched && orderForm.controls.address.invalid) { <small>Please enter a complete delivery address.</small> }
+            </label>
+
+            <button class="place-order" type="submit">Submit order <span>→</span></button>
+            <p class="form-note">By submitting, you confirm that the information above is correct.</p>
+          </form>
+        </div>
+
+        <aside class="summary-card">
+          <div class="card-title"><i>02</i><div><span>Your cart</span><h2>Order summary</h2></div></div>
+          <div class="summary-items">
+            @for (item of cartService.items(); track item.id) {
+              <div class="summary-item">
+                <div class="summary-image"><img [src]="item.image" [alt]="item.name"><b>{{ item.quantity }}</b></div>
+                <div><h3>{{ item.name }}</h3><span>{{ item.category }}</span></div>
+                <strong>Tk {{ item.price * item.quantity }}</strong>
+              </div>
+            }
+          </div>
+          <div class="summary-total"><span>Subtotal</span><strong>Tk {{ cartService.subtotal() }}</strong></div>
+          <p>Delivery charge will be confirmed by our team.</p>
+          <a routerLink="/" fragment="products">← Add more items</a>
+        </aside>
+      </div>
+    } @else {
+      <div class="no-order">
+        <div>🛍</div>
+        <h2>Your cart is waiting</h2>
+        <p>Add your favourite food and drinks before continuing to checkout.</p>
+        <a routerLink="/" fragment="products">Browse the menu</a>
+      </div>
+    }
+  </div>
+</section>

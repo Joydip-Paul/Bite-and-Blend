@@ -1,65 +1,68 @@
 <footer class="footer">
   <div class="container">
-    <div class="footer-top">
+    <div class="footer-main">
       <div class="footer-brand">
-        <a routerLink="/" class="logo">
-          <img src="assets/img/logo.jpg" alt="Bite & Blend" />
+        <a routerLink="/" class="footer-logo" aria-label="Bite & Blend home">
+          <img src="assets/img/logo.jpg" alt="Bite & Blend">
         </a>
-        <p>Fresh bites, delicious blends and good food made with love.</p>
-        <div class="social-links">
+        <p class="brand-note">Fresh bites, delicious blends and memorable flavours—thoughtfully made with love, every day.</p>
+
+        <div class="social-links" aria-label="Social media links">
           <a href="#" aria-label="Facebook">
-            <svg viewBox="0 0 24 24">
-              <path d="M14 8h3V4h-3c-3.3 0-5 1.7-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.7.3-1 1-1z" />
-            </svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-3.3 0-5 1.7-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.7.3-1 1-1z"/></svg>
           </a>
           <a href="#" aria-label="Instagram">
-            <svg viewBox="0 0 24 24">
-              <path
-                d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3.5A4.5 4.5 0 1112 16a4.5 4.5 0 010-9zm0 2A2.5 2.5 0 1014.5 12 2.5 2.5 0 0012 9.5zM17.5 6.5a1 1 0 110 2 1 1 0 010-2z"
-              />
-            </svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3.5A4.5 4.5 0 1112 16a4.5 4.5 0 010-9zm0 2A2.5 2.5 0 1014.5 12 2.5 2.5 0 0012 9.5zM17.5 6.5a1 1 0 110 2 1 1 0 010-2z"/></svg>
           </a>
         </div>
       </div>
 
-      <div class="footer-column">
-        <h3>Quick Links</h3>
-        <a routerLink="/">Home</a>
-        <a routerLink="/menu">Menu</a>
-        <a routerLink="/about">About Us</a>
-        <a routerLink="/contact">Contact</a>
-      </div>
+      <nav class="footer-column" aria-label="Quick links">
+        <span class="column-label">Discover</span>
+        <h2>Quick links</h2>
+        <a routerLink="/"><i>01</i> Home</a>
+        <a routerLink="/" fragment="products"><i>02</i> Our menu</a>
+        <a routerLink="/about"><i>03</i> Our story</a>
+        <a routerLink="/contact"><i>04</i> Contact us</a>
+      </nav>
 
-      <div class="footer-column">
-        <h3>Categories</h3>
-        <a routerLink="/menu/juice">Juice</a>
-        <a routerLink="/menu/burger">Burger</a>
-        <a routerLink="/menu/combo-meal">Combo Meal</a>
-        <a routerLink="/menu/sandwich">Sandwich</a>
-        <a routerLink="/menu/momo">Momo</a>
-        <a routerLink="/menu/snacks">Snacks</a>
-      </div>
+      <nav class="footer-column" aria-label="Food categories">
+        <span class="column-label">Taste</span>
+        <h2>Our favourites</h2>
+        <a routerLink="/" [queryParams]="{ category: 'Juice' }" fragment="products">Juice</a>
+        <a routerLink="/" [queryParams]="{ category: 'Burger' }" fragment="products">Burger</a>
+        <a routerLink="/" [queryParams]="{ category: 'Combo Meal' }" fragment="products">Combo Meal</a>
+        <a routerLink="/" [queryParams]="{ category: 'Momo' }" fragment="products">Momo</a>
+      </nav>
 
       <div class="footer-column contact-column">
-        <h3>Contact</h3>
-        <p>Chunarughat, Habiganj</p>
-        <a href="tel:+8801XXXXXXXXX">+880 1XXXXXXXXX</a>
-        <a href="mailto:hello@biteandblend.com">hello@biteandblend.com</a>
+        <span class="column-label">Visit us</span>
+        <h2>Come say hello</h2>
 
-        <div class="hours">
-          <strong>Opening Hours</strong>
-          <span>Everyday: 10:00 AM – 10:00 PM</span>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 00-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z"/></svg>
+          <span>Chunarughat, Habiganj</span>
+        </div>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 006.6 6.6l2.2-2.2a1 1 0 011-.2 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.4 11.4 0 00.6 3.6 1 1 0 01-.3 1z"/></svg>
+          <a href="tel:+8801XXXXXXXXX">+880 1XXXXXXXXX</a>
+        </div>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5z"/></svg>
+          <a href="mailto:hello@biteandblend.com">hello@biteandblend.com</a>
+        </div>
+
+        <div class="opening-hours">
+          <span>Open every day</span>
+          <strong>10:00 AM — 10:00 PM</strong>
         </div>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <p>© 2026 Bite & Blend. All rights reserved.</p>
-      <div>
-        <a routerLink="/privacy">Privacy Policy</a>
-        <a routerLink="/terms">Terms & Conditions</a>
-      </div>
+      <p>© {{ currentYear }} Bite & Blend. Crafted with care.</p>
+      <p class="footer-signature"><span aria-hidden="true">✦</span> Fresh food · Warm moments</p>
+      <a routerLink="/contact">Get in touch <span aria-hidden="true">→</span></a>
     </div>
   </div>
 </footer>
-    

@@ -4,18 +4,20 @@ import {
   ElementRef,
   HostListener,
   OnDestroy,
+  OnInit,
   ViewChild,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-category',
   standalone: true,
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './category.component.html',
   styleUrl: './category.component.scss',
 })
-export class CategoryComponent implements AfterViewInit, OnDestroy {
+export class CategoryComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('categoryList') private categoryList?: ElementRef<HTMLElement>;
 
   readonly categories = [
@@ -30,8 +32,22 @@ export class CategoryComponent implements AfterViewInit, OnDestroy {
   showNavigation = false;
   canScrollLeft = false;
   canScrollRight = false;
+  selectedCategory = '';
 
   private resizeObserver?: ResizeObserver;
+  private routeSubscription?: Subscription;
+
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.routeSubscription = this.route.queryParamMap.subscribe((params) => {
+      this.selectedCategory = params.get('category') ?? '';
+    });
+
+    if (this.route.snapshot.queryParamMap.has('category')) {
+      this.router.navigate(['/'], { fragment: 'products', replaceUrl: true });
+    }
+  }
 
   ngAfterViewInit(): void {
     // Measure after Angular's initial change-detection pass has completed.
@@ -45,6 +61,12 @@ export class CategoryComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.resizeObserver?.disconnect();
+    this.routeSubscription?.unsubscribe();
+  }
+
+  toggleCategory(category: string): void {
+    const categoryQuery = this.selectedCategory === category ? {} : { category };
+    this.router.navigate(['/'], { queryParams: categoryQuery, fragment: 'products' });
   }
 
   @HostListener('window:resize')

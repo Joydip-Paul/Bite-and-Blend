@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { HeroComponent } from "../../shared/components/hero/hero.component";
 import { CategoryComponent } from '../../shared/components/category/category.component';
 import { Product, PRODUCTS } from '../../shared/data/products';
+import { CartService } from '../../shared/services/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   selectedCategory = '';
   private routeSubscription?: Subscription;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private cart: CartService) {}
+
+  addToCart(product: Product): void {
+    this.cart.add(product);
+  }
 
   ngOnInit(): void {
     this.routeSubscription = this.route.queryParamMap.subscribe((params) => {

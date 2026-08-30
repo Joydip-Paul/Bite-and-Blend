@@ -1,17 +1,66 @@
 <header class="header">
   <div class="container">
     <div class="header-wrapper">
-        <a routerLink="/" class="logo">
-          <img src="assets/img/main-logo.jpg" alt="Logo">
-        </a>
-    
-        <div class="header-actions">
-          <app-search></app-search>
-    
-          <a routerLink="/cart" class="cart">
-            <img src="assets/icons/cart.svg" alt="Cart">
-          </a>
-        </div>
+      <a routerLink="/" class="logo"><img src="assets/img/main-logo.jpg" alt="Bite & Blend"></a>
+
+      <div class="header-actions">
+        <app-search></app-search>
+        <button type="button" class="cart" aria-label="Open shopping cart" (click)="openCart()">
+          <img src="assets/icons/cart.svg" alt="">
+          @if (cartService.itemCount()) {
+            <span class="cart-count">{{ cartService.itemCount() }}</span>
+          }
+        </button>
+      </div>
     </div>
   </div>
 </header>
+
+@if (cartOpen) {
+  <button class="cart-backdrop" type="button" aria-label="Close cart" (click)="closeCart()"></button>
+}
+
+<aside class="cart-drawer" [class.cart-drawer--open]="cartOpen" [attr.aria-hidden]="!cartOpen" aria-label="Shopping cart">
+  <div class="drawer-header">
+    <div>
+      <span>Your selection</span>
+      <h2>Shopping cart <small>{{ cartService.itemCount() }}</small></h2>
+    </div>
+    <button type="button" class="drawer-close" aria-label="Close cart" (click)="closeCart()">×</button>
+  </div>
+
+  @if (cartService.items().length) {
+    <div class="drawer-items">
+      @for (item of cartService.items(); track item.id) {
+        <article class="drawer-item">
+          <div class="drawer-item-image"><img [src]="item.image" [alt]="item.name"></div>
+          <div class="drawer-item-copy">
+            <span>{{ item.category }}</span>
+            <h3>{{ item.name }}</h3>
+            <strong>Tk {{ item.price * item.quantity }}</strong>
+            <div class="quantity-control" aria-label="Item quantity">
+              <button type="button" [attr.aria-label]="'Decrease ' + item.name" (click)="cartService.decrease(item.id)">−</button>
+              <b>{{ item.quantity }}</b>
+              <button type="button" [attr.aria-label]="'Increase ' + item.name" (click)="cartService.increase(item.id)">+</button>
+            </div>
+          </div>
+          <button type="button" class="remove-item" [attr.aria-label]="'Remove ' + item.name" (click)="cartService.remove(item.id)">×</button>
+        </article>
+      }
+    </div>
+
+    <div class="drawer-footer">
+      <div class="subtotal"><span>Subtotal</span><strong>Tk {{ cartService.subtotal() }}</strong></div>
+      <p>Delivery charge will be confirmed with your order.</p>
+      <a routerLink="/order" class="checkout-button" (click)="closeCart()">Continue to order <span>→</span></a>
+      <button type="button" class="continue-shopping" (click)="closeCart()">Continue shopping</button>
+    </div>
+  } @else {
+    <div class="empty-cart">
+      <div><img src="assets/icons/cart.svg" alt=""></div>
+      <h3>Your cart is empty</h3>
+      <p>Add something delicious from our menu.</p>
+      <button type="button" (click)="closeCart()">Explore products</button>
+    </div>
+  }
+</aside>

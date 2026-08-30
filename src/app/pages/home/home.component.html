@@ -40,13 +40,13 @@
               <p>{{ product.description }}</p>
               <div class="product-bottom">
                 <strong><small>Tk</small> {{ product.price }}</strong>
-                <a
-                  routerLink="/order"
-                  [queryParams]="{ product: product.id }"
+                <button
+                  type="button"
                   class="add-button"
-                  [attr.aria-label]="'Order ' + product.name">
+                  [attr.aria-label]="'Add ' + product.name + ' to cart'"
+                  (click)="addToCart(product)">
                   <span aria-hidden="true">+</span> Add
-                </a>
+                </button>
               </div>
             </div>
           </article>

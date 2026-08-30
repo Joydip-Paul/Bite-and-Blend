@@ -1,9 +1,5 @@
 <section class="category-section">
   <div class="container">
-    <div class="category-heading">
-      <div><span>Browse the menu</span><h2>What are you craving?</h2></div>
-      <p>Pick a category and find your favourite.</p>
-    </div>
     <div class="category-carousel">
       @if (showNavigation) {
         <button
@@ -21,13 +17,18 @@
         class="category-list"
         (scroll)="updateNavigation()">
         @for (category of categories; track category.name) {
-          <a routerLink="/" [queryParams]="{ category: category.slug }" fragment="products" class="category-card">
+          <button
+            type="button"
+            class="category-card"
+            [class.category-card--active]="selectedCategory === category.slug"
+            [attr.aria-pressed]="selectedCategory === category.slug"
+            (click)="toggleCategory(category.slug)">
             <div class="category-image">
               <img [src]="category.image" [alt]="category.name">
             </div>
             <div class="category-copy"><h3>{{ category.name }}</h3><span>{{ category.count }} items</span></div>
             <i aria-hidden="true">→</i>
-          </a>
+          </button>
         }
       </div>
 

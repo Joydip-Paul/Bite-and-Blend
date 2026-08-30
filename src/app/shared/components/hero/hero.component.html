@@ -1,3 +1,37 @@
-<section class="hero">
-  <img src="assets/img/hero-banner.png" alt="Hero Banner" class="hero-image" />
+<section
+  class="hero"
+  aria-roledescription="carousel"
+  aria-label="Featured offers"
+  (mouseenter)="pauseAutoplay()"
+  (mouseleave)="resumeAutoplay()"
+  (focusin)="pauseAutoplay()"
+  (focusout)="resumeAutoplay()">
+
+  <div class="hero-track">
+    @for (slide of slides; track slide.image; let index = $index) {
+      <div
+        class="hero-slide"
+        [class.hero-slide--active]="index === activeSlide"
+        [attr.aria-hidden]="index !== activeSlide">
+        <img [src]="slide.image" [alt]="slide.alt" class="hero-image">
+      </div>
+    }
+  </div>
+
+  <div class="slider-dots" aria-label="Choose a hero slide">
+    @for (slide of slides; track slide.image; let index = $index) {
+      <button
+        type="button"
+        [class.active]="index === activeSlide"
+        [attr.aria-label]="'Show slide ' + (index + 1)"
+        [attr.aria-current]="index === activeSlide ? 'true' : null"
+        (click)="selectSlide(index)">
+        <span></span>
+      </button>
+    }
+  </div>
+
+  <div class="slide-counter" aria-hidden="true">
+    <strong>0{{ activeSlide + 1 }}</strong><span></span><small>0{{ slides.length }}</small>
+  </div>
 </section>

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SearchComponent } from "../search/search.component";
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -10,13 +11,22 @@ import { SearchComponent } from "../search/search.component";
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  menuOpen = false;
+  cartOpen = false;
 
-  toggleMenu() {
-    this.menuOpen = !this.menuOpen;
+  constructor(readonly cartService: CartService) {}
+
+  openCart(): void {
+    this.cartOpen = true;
+    if (typeof document !== 'undefined') document.body.style.overflow = 'hidden';
   }
 
-  closeMenu() {
-    this.menuOpen = false;
+  closeCart(): void {
+    this.cartOpen = false;
+    if (typeof document !== 'undefined') document.body.style.overflow = '';
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    if (this.cartOpen) this.closeCart();
   }
 }

@@ -1,0 +1,52 @@
+<section class="policy-hero">
+  <div class="container">
+    <span>Policies & information</span>
+    <h1>How we serve you.</h1>
+    <p>Choose a policy below to understand how Bite & Blend handles your information, orders, cancellations and returns.</p>
+  </div>
+</section>
+
+<section class="policy-body">
+  <div class="container">
+    <div class="policy-tabs" role="tablist" aria-label="Bite & Blend policies">
+      @for (policy of policyOrder; track policy) {
+        <button
+          type="button"
+          role="tab"
+          [class.active]="activePolicy === policy"
+          [attr.aria-selected]="activePolicy === policy"
+          [attr.aria-controls]="policy + '-panel'"
+          (click)="selectPolicy(policy)">
+          <span>0{{ $index + 1 }}</span>{{ policies[policy].label }}
+        </button>
+      }
+    </div>
+
+    <div class="policy-layout" role="tabpanel" [id]="activePolicy + '-panel'">
+      <aside>
+        <span>{{ page.eyebrow }}</span>
+        <h2>{{ page.title }}</h2>
+        <p>{{ page.introduction }}</p>
+        <small>Last updated<br><strong>{{ lastUpdated }}</strong></small>
+      </aside>
+
+      <article>
+        @for (section of page.sections; track section.heading; let number = $index) {
+          <section>
+            <span>0{{ number + 1 }}</span>
+            <h2>{{ section.heading }}</h2>
+            @for (paragraph of section.paragraphs; track paragraph) { <p>{{ paragraph }}</p> }
+            @if (section.bullets) {
+              <ul>@for (bullet of section.bullets; track bullet) { <li>{{ bullet }}</li> }</ul>
+            }
+          </section>
+        }
+
+        <div class="policy-help">
+          <div><span>Need clarification?</span><h2>We’re happy to help.</h2></div>
+          <a routerLink="/contact">Contact us <span>→</span></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

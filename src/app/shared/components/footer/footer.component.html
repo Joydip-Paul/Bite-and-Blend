@@ -35,6 +35,15 @@
         <a routerLink="/" [queryParams]="{ category: 'Momo' }" fragment="products">Momo</a>
       </nav>
 
+      <nav class="footer-column policy-column" aria-label="Policies">
+        <span class="column-label">Information</span>
+        <h2>Policies</h2>
+        <a routerLink="/about">About Us</a>
+        <a routerLink="/policies" [queryParams]="{ tab: 'privacy' }">Privacy Policy</a>
+        <a routerLink="/policies" [queryParams]="{ tab: 'terms' }">Terms & Conditions</a>
+        <a routerLink="/policies" [queryParams]="{ tab: 'returns' }">Return & Cancellation</a>
+      </nav>
+
       <div class="footer-column contact-column">
         <span class="column-label">Visit us</span>
         <h2>Come say hello</h2>

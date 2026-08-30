@@ -1,1 +1,28 @@
-<p>contact works!</p>
+<section class="contact-page">
+  <div class="container">
+    <div class="contact-heading"><span>Contact us</span><h1>We’d love to hear from you.</h1><p>Questions, feedback or help with an order—send us a message and our team will get back to you.</p></div>
+
+    <div class="contact-layout">
+      <aside>
+        <span>Come say hello</span><h2>Visit or reach us directly</h2>
+        <div class="contact-method"><i>⌖</i><div><small>Our location</small><strong>Chunarughat, Habiganj</strong></div></div>
+        <div class="contact-method"><i>☎</i><div><small>Call us</small><a href="tel:+8801XXXXXXXXX">+880 1XXXXXXXXX</a></div></div>
+        <div class="contact-method"><i>✉</i><div><small>Email us</small><a href="mailto:hello@biteandblend.com">hello@biteandblend.com</a></div></div>
+        <div class="hours"><small>Opening hours</small><strong>Every day</strong><span>10:00 AM — 10:00 PM</span></div>
+      </aside>
+
+      <div class="contact-form-card">
+        <span>Send a message</span><h2>How can we help?</h2>
+        @if (submitted) { <div class="sent-message" role="status">✓ Thank you! Your message was submitted and logged successfully.</div> }
+        <form [formGroup]="contactForm" (ngSubmit)="submitMessage()" novalidate>
+          <div class="field-row">
+            <label><span>Your name</span><input type="text" formControlName="name" placeholder="Full name" autocomplete="name">@if (contactForm.controls.name.touched && contactForm.controls.name.invalid) { <small>Please enter your name.</small> }</label>
+            <label><span>Phone number</span><input type="tel" formControlName="phone" placeholder="01XXXXXXXXX" autocomplete="tel">@if (contactForm.controls.phone.touched && contactForm.controls.phone.invalid) { <small>Enter a valid mobile number.</small> }</label>
+          </div>
+          <label><span>Your message</span><textarea formControlName="message" rows="6" placeholder="Tell us how we can help..."></textarea>@if (contactForm.controls.message.touched && contactForm.controls.message.invalid) { <small>Please write at least 10 characters.</small> }</label>
+          <button type="submit">Send message <span>→</span></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

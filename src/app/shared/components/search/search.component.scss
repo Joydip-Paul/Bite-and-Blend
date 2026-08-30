@@ -1,16 +1,18 @@
 .search-box {
-  width: 260px;
-  height: 42px;
+  width: clamp(190px, 24vw, 340px);
+  height: 44px;
   display: flex;
   align-items: center;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 25px;
   padding: 0 12px;
-  background: #fff;
-  transition: 0.3s;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s, box-shadow 0.2s;
 
   &:focus-within {
     border-color: #b65a38;
+    box-shadow: 0 0 0 3px rgba(182, 90, 56, 0.18);
   }
 
   input {
@@ -27,6 +29,7 @@
   }
 
   button {
+    flex: 0 0 auto;
     border: none;
     background: transparent;
     cursor: pointer;
@@ -35,8 +38,8 @@
     padding: 0;
 
     svg {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       fill: #333;
       transition: 0.3s;
     }
@@ -45,11 +48,30 @@
       fill: #b65a38;
     }
   }
+
+  .clear-button {
+    margin-right: 6px;
+    padding: 3px;
+    border-radius: 50%;
+
+    svg { width: 17px; height: 17px; fill: #888; }
+    &:hover { background: #f1eee8; }
+  }
+
+  .search-button {
+    padding-left: 9px;
+    border-left: 1px solid #e6e2da;
+  }
 }
 
 @media (max-width: 768px) {
   .search-box {
-    width: 160px;
+    width: min(52vw, 260px);
     height: 38px;
   }
+}
+
+@media (max-width: 390px) {
+  .search-box { width: 50vw; padding-inline: 10px; }
+  .search-box input { min-width: 0; font-size: 12px; }
 }

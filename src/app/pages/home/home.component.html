@@ -1,2 +1,64 @@
 <app-hero></app-hero>
 <app-category></app-category>
+
+<section class="products-section" id="products">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">Made fresh for you</span>
+        <h2>
+          @if (searchTerm) {
+            Results for “{{ searchTerm }}”
+          } @else if (selectedCategory) {
+            {{ selectedCategory }} Menu
+          } @else {
+            Explore All Products
+          }
+        </h2>
+        <p>{{ filteredProducts.length }} delicious item{{ filteredProducts.length === 1 ? '' : 's' }} available</p>
+      </div>
+
+      @if (searchTerm || selectedCategory) {
+        <a routerLink="/" fragment="products" class="clear-filter">Show all products</a>
+      }
+    </div>
+
+    @if (filteredProducts.length) {
+      <div class="product-grid">
+        @for (product of filteredProducts; track product.id) {
+          <article class="product-card">
+            <div class="product-visual" [class.product-visual--featured]="product.featured">
+              @if (product.featured) {
+                <span class="popular-badge">Popular</span>
+              }
+              <img [src]="product.image" [alt]="product.name" loading="lazy">
+            </div>
+
+            <div class="product-info">
+              <span class="product-category">{{ product.category }}</span>
+              <h3>{{ product.name }}</h3>
+              <p>{{ product.description }}</p>
+              <div class="product-bottom">
+                <strong><small>Tk</small> {{ product.price }}</strong>
+                <a
+                  routerLink="/order"
+                  [queryParams]="{ product: product.id }"
+                  class="add-button"
+                  [attr.aria-label]="'Order ' + product.name">
+                  <span aria-hidden="true">+</span> Add
+                </a>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    } @else {
+      <div class="empty-state">
+        <span aria-hidden="true">⌕</span>
+        <h3>No products found</h3>
+        <p>Try a different product name or browse the complete menu.</p>
+        <a routerLink="/" fragment="products">View all products</a>
+      </div>
+    }
+  </div>
+</section>

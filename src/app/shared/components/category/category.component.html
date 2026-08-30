@@ -1,13 +1,45 @@
 <section class="category-section">
   <div class="container">
-    <div class="category-list">
-      @for (category of categories; track category.name) {
-        <a [routerLink]="category.link" class="category-card">
-          <div class="category-image">
-            <img [src]="category.image" [alt]="category.name">
-          </div>
-          <h3>{{ category.name }}</h3>
-        </a>
+    <div class="category-heading">
+      <div><span>Browse the menu</span><h2>What are you craving?</h2></div>
+      <p>Pick a category and find your favourite.</p>
+    </div>
+    <div class="category-carousel">
+      @if (showNavigation) {
+        <button
+          class="carousel-button carousel-button--left"
+          type="button"
+          aria-label="Show previous categories"
+          [disabled]="!canScrollLeft"
+          (click)="scroll('left')">
+          <span aria-hidden="true">&#10094;</span>
+        </button>
+      }
+
+      <div
+        #categoryList
+        class="category-list"
+        (scroll)="updateNavigation()">
+        @for (category of categories; track category.name) {
+          <a routerLink="/" [queryParams]="{ category: category.slug }" fragment="products" class="category-card">
+            <div class="category-image">
+              <img [src]="category.image" [alt]="category.name">
+            </div>
+            <div class="category-copy"><h3>{{ category.name }}</h3><span>{{ category.count }} items</span></div>
+            <i aria-hidden="true">→</i>
+          </a>
+        }
+      </div>
+
+      @if (showNavigation) {
+        <button
+          class="carousel-button carousel-button--right"
+          type="button"
+          aria-label="Show next categories"
+          [disabled]="!canScrollRight"
+          (click)="scroll('right')">
+          <span aria-hidden="true">&#10095;</span>
+        </button>
       }
     </div>
   </div>

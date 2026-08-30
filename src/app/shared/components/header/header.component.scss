@@ -1,6 +1,7 @@
 .header {
     width: 100%;
-    background: #313002;
+    background: rgba(37, 37, 7, 0.97);
+    backdrop-filter: blur(14px);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -20,9 +21,9 @@
     align-items: center;
 
     img {
-        width: 80px;
-        height: auto;
-        display: block;
+        width: 70px;
+        height: 70px;
+        object-fit: contain;
     }
 }
 
@@ -39,10 +40,10 @@
     color: #222;
     transition: 0.3s;
 
-    svg {
+    img {
         width: 28px;
         height: 28px;
-        fill: #fff;
+        filter: brightness(0) invert(1);
     }
 
     &:hover {
@@ -51,7 +52,10 @@
 }
 
 @media (max-width: 768px) {
+    .header, .header-wrapper { height: 72px; }
+    .logo img { width: 54px; height: 54px; }
     .header-actions {
-        gap: 15px;
+        gap: 12px;
     }
+    .cart img { width: 24px; height: 24px; }
 }

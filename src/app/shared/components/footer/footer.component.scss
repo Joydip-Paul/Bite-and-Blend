@@ -28,7 +28,7 @@
     max-width: 320px;
     margin: 22px 0;
     color: #aaa990;
-    font-family: Georgia, 'Times New Roman', serif;
+    font-family: var(--font-heading);
     font-size: 15px;
     font-style: italic;
     line-height: 1.8;
@@ -61,7 +61,7 @@
     gap: 13px;
 
     .column-label { color: #b98355; font-size: 10px; font-weight: 800; letter-spacing: 2.2px; text-transform: uppercase; }
-    h2 { margin: -3px 0 10px; color: #f4f0dc; font-family: Georgia, 'Times New Roman', serif; font-size: 19px; font-weight: 500; }
+    h2 { margin: -3px 0 10px; color: #f4f0dc; font-family: var(--font-heading); font-size: 19px; font-weight: 500; }
 
     > a {
         display: inline-flex;
@@ -103,7 +103,7 @@
     border-radius: 4px;
 
     span { color: #8f8f77; font-size: 9px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
-    strong { color: #e9e5cf; font-family: Georgia, 'Times New Roman', serif; font-size: 13px; font-weight: 400; }
+    strong { color: #e9e5cf; font-family: var(--font-heading); font-size: 13px; font-weight: 400; }
 }
 
 .footer-bottom {
@@ -122,7 +122,7 @@
     display: flex;
     align-items: center;
     gap: 9px;
-    font-family: Georgia, 'Times New Roman', serif;
+    font-family: var(--font-heading);
     font-style: italic;
 
     span { color: #b98355; }

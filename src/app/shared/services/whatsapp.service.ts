@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class WhatsAppService {
-  private readonly businessNumber = '88001876406663';
+  private readonly businessNumber = '8801759696957';
 
   send(message: string): void {
     if (typeof window === 'undefined') return;

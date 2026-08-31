@@ -130,7 +130,7 @@
     h2 {
         margin: 6px 0 0;
         color: #fff;
-        font-family: Georgia, serif;
+        font-family: var(--font-heading);
         font-size: 24px;
         font-weight: 500;
     }
@@ -143,7 +143,7 @@
         color: #252507;
         background: #d8b675;
         border-radius: 50%;
-        font-family: Arial, sans-serif;
+        font-family: var(--font-body);
         font-size: 11px;
     }
 }
@@ -256,7 +256,7 @@
     }
     strong {
         color: #252507;
-        font-family: Georgia, serif;
+        font-family: var(--font-heading);
         font-size: 25px;
     }
 }
@@ -308,7 +308,7 @@
     }
     h3 {
         margin: 22px 0 6px;
-        font-family: Georgia, serif;
+        font-family: var(--font-heading);
         font-size: 24px;
     }
     p {

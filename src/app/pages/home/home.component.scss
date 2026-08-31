@@ -57,14 +57,14 @@
   background: #fff;
   border: 1px solid #ebe9df;
   border-radius: 22px;
-  box-shadow: 0 9px 28px rgba(45, 42, 20, 0.06);
+  // box-shadow: 0 9px 28px rgba(45, 42, 20, 0.06);
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease;
 
   &:hover {
     transform: translateY(-6px);
-    box-shadow: 0 16px 38px rgba(45, 42, 20, 0.12);
+    // box-shadow: 0 16px 38px rgba(45, 42, 20, 0.12);
 
     .product-visual img {
       transform: scale(1.07) rotate(-2deg);
@@ -75,7 +75,7 @@
 .product-visual {
   position: relative;
   display: grid;
-  height: 220px;
+  height: 320px;
   place-items: center;
   overflow: hidden;
   background: radial-gradient(circle at 50% 42%, #fff8dc 0 20%, #efeccf 70%);
@@ -94,9 +94,9 @@
   img {
     position: relative;
     z-index: 1;
-    width: 68%;
-    height: 68%;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     filter: drop-shadow(0 12px 12px rgba(53, 48, 12, 0.17));
     transition: transform 0.3s ease;
   }
@@ -200,6 +200,50 @@
   }
 }
 
+.quantity-picker {
+  display: grid;
+  min-width: 105px;
+  height: 39px;
+  grid-template-columns: 35px 35px 35px;
+  align-items: center;
+  overflow: hidden;
+  color: #fff;
+  background: #313002;
+  border-radius: 12px;
+
+  button {
+    display: grid;
+    height: 100%;
+    padding: 0;
+    place-items: center;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    transition: background 0.2s ease;
+
+    span {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    &:hover {
+      background: #a84f30;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #d8b675;
+      outline-offset: -3px;
+    }
+  }
+
+  > strong {
+    color: inherit;
+    font-size: 14px;
+    text-align: center;
+  }
+}
+
 .empty-state {
   padding: 70px 20px;
   text-align: center;
@@ -242,7 +286,7 @@
     gap: 14px;
   }
   .product-visual {
-    height: 175px;
+    // height: 175px;
   }
   .product-info {
     padding: 15px;
@@ -273,10 +317,6 @@
     height: 100%;
     min-height: 185px;
   }
-  .product-visual img {
-    width: 76%;
-    height: 76%;
-  }
   .product-info h3 {
     min-height: 0;
   }
@@ -285,5 +325,13 @@
   }
   .add-button {
     padding: 9px 11px;
+  }
+  .quantity-picker {
+    min-width: 96px;
+    grid-template-columns: repeat(3, 32px);
+
+    > strong {
+      font-size: 14px;
+    }
   }
 }

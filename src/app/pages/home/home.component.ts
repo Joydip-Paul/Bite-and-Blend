@@ -28,6 +28,26 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.cart.add(product);
   }
 
+  productQuantity(productId: number): number {
+    return this.cart.items().find((item) => item.id === productId)?.quantity ?? 0;
+  }
+
+  increaseQuantity(productId: number): void {
+    this.cart.increase(productId);
+  }
+
+  decreaseQuantity(productId: number): void {
+    this.cart.decrease(productId);
+  }
+
+  useFallbackImage(event: Event): void {
+    const image = event.currentTarget as HTMLImageElement;
+    if (image.dataset['fallbackApplied']) return;
+
+    image.dataset['fallbackApplied'] = 'true';
+    image.src = 'assets/img/products/combo.png';
+  }
+
   ngOnInit(): void {
     this.routeSubscription = this.route.queryParamMap.subscribe((params) => {
       this.searchTerm = params.get('search')?.trim() ?? '';
@@ -55,7 +75,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           (!category || this.toSlug(product.category) === category);
       });
 
-      if (search || category) {
+      if (search) {
         if (typeof document !== 'undefined') {
           queueMicrotask(() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }));
         }

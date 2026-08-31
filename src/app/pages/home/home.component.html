@@ -36,7 +36,12 @@
               @if (product.featured) {
                 <span class="popular-badge">Popular</span>
               }
-              <img [src]="product.image" [alt]="product.name" loading="lazy" />
+              <img
+                [src]="product.image"
+                [alt]="product.name"
+                loading="lazy"
+                (error)="useFallbackImage($event)"
+              />
             </div>
 
             <div class="product-info">
@@ -47,14 +52,34 @@
               </div>
               <div class="product-bottom">
                 <strong><small>Tk</small> {{ product.price }}</strong>
-                <button
-                  type="button"
-                  class="add-button"
-                  [attr.aria-label]="'Add ' + product.name + ' to cart'"
-                  (click)="addToCart(product)"
-                >
-                  <span aria-hidden="true">+</span> Add
-                </button>
+                @if (productQuantity(product.id); as quantity) {
+                  <div class="quantity-picker" role="group" [attr.aria-label]="product.name + ' quantity'">
+                    <button
+                      type="button"
+                      [attr.aria-label]="'Decrease ' + product.name"
+                      (click)="decreaseQuantity(product.id)"
+                    >
+                      <span aria-hidden="true">−</span>
+                    </button>
+                    <strong aria-live="polite">{{ quantity }}</strong>
+                    <button
+                      type="button"
+                      [attr.aria-label]="'Increase ' + product.name"
+                      (click)="increaseQuantity(product.id)"
+                    >
+                      <span aria-hidden="true">+</span>
+                    </button>
+                  </div>
+                } @else {
+                  <button
+                    type="button"
+                    class="add-button"
+                    [attr.aria-label]="'Add ' + product.name + ' to cart'"
+                    (click)="addToCart(product)"
+                  >
+                    <span aria-hidden="true">+</span> Add
+                  </button>
+                }
               </div>
             </div>
           </article>

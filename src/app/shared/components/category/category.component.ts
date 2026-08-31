@@ -62,7 +62,13 @@ export class CategoryComponent implements OnInit, AfterViewInit, OnDestroy {
 
   toggleCategory(category: string): void {
     const categoryQuery = this.selectedCategory === category ? {} : { category };
-    this.router.navigate(['/'], { queryParams: categoryQuery });
+    const scrollPosition = typeof window !== 'undefined' ? window.scrollY : 0;
+
+    this.router.navigate(['/'], { queryParams: categoryQuery }).then(() => {
+      if (typeof window !== 'undefined') {
+        requestAnimationFrame(() => window.scrollTo({ top: scrollPosition, behavior: 'auto' }));
+      }
+    });
   }
 
   private toSlug(value: string): string {

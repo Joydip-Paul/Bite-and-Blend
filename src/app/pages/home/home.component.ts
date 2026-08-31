@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { HeroComponent } from "../../shared/components/hero/hero.component";
 import { CategoryComponent } from '../../shared/components/category/category.component';
@@ -19,9 +19,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   filteredProducts: readonly Product[] = PRODUCTS;
   searchTerm = '';
   selectedCategory = '';
+  selectedCategoryLabel = '';
   private routeSubscription?: Subscription;
 
-  constructor(private route: ActivatedRoute, private cart: CartService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private cart: CartService) {}
 
   addToCart(product: Product): void {
     this.cart.add(product);
@@ -30,14 +31,28 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.routeSubscription = this.route.queryParamMap.subscribe((params) => {
       this.searchTerm = params.get('search')?.trim() ?? '';
-      this.selectedCategory = params.get('category')?.trim() ?? '';
+      const categoryParam = params.get('category')?.trim() ?? '';
+      this.selectedCategory = this.toSlug(categoryParam);
       const search = this.searchTerm.toLowerCase();
-      const category = this.selectedCategory.toLowerCase();
+      const category = this.selectedCategory;
+
+      if (categoryParam && categoryParam !== category) {
+        this.router.navigate([], {
+          relativeTo: this.route,
+          queryParams: { category },
+          queryParamsHandling: 'merge',
+          replaceUrl: true,
+        });
+      }
+
+      this.selectedCategoryLabel = this.products.find(
+        (product) => this.toSlug(product.category) === category,
+      )?.category ?? '';
 
       this.filteredProducts = this.products.filter((product) => {
         const searchableText = `${product.name} ${product.category} ${product.description}`.toLowerCase();
         return (!search || searchableText.includes(search)) &&
-          (!category || product.category.toLowerCase() === category);
+          (!category || this.toSlug(product.category) === category);
       });
 
       if (search || category) {
@@ -50,6 +65,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.routeSubscription?.unsubscribe();
+  }
+
+  private toSlug(value: string): string {
+    return value.trim().toLowerCase().replace(/\s+/g, '-');
   }
 
 }

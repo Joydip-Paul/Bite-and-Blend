@@ -39,7 +39,6 @@ export class SearchComponent implements OnDestroy {
 
     this.router.navigate(['/'], {
       queryParams: search ? { search } : {},
-      fragment: 'products',
       replaceUrl: true,
     });
   }

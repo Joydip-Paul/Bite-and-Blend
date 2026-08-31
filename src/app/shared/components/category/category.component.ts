@@ -21,12 +21,12 @@ export class CategoryComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('categoryList') private categoryList?: ElementRef<HTMLElement>;
 
   readonly categories = [
-    { name: 'Juice', image: 'assets/icons/juice.svg', slug: 'Juice', count: 2 },
-    { name: 'Burger', image: 'assets/icons/burger.svg', slug: 'Burger', count: 2 },
-    { name: 'Combo Meal', image: 'assets/icons/combo-meal.svg', slug: 'Combo Meal', count: 2 },
-    { name: 'Sandwich', image: 'assets/icons/sandwich.svg', slug: 'Sandwich', count: 2 },
-    { name: 'Momo', image: 'assets/icons/momo.svg', slug: 'Momo', count: 2 },
-    { name: 'Snacks', image: 'assets/icons/snacks.svg', slug: 'Snacks', count: 2 },
+    { name: 'Juice', image: 'assets/icons/juice.svg', slug: 'juice', count: 2 },
+    { name: 'Burger', image: 'assets/icons/burger.svg', slug: 'burger', count: 2 },
+    { name: 'Combo Meal', image: 'assets/icons/combo-meal.svg', slug: 'combo-meal', count: 2 },
+    { name: 'Sandwich', image: 'assets/icons/sandwich.svg', slug: 'sandwich', count: 2 },
+    { name: 'Momo', image: 'assets/icons/momo.svg', slug: 'momo', count: 2 },
+    { name: 'Snacks', image: 'assets/icons/snacks.svg', slug: 'snacks', count: 2 },
   ];
 
   showNavigation = false;
@@ -41,12 +41,8 @@ export class CategoryComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.routeSubscription = this.route.queryParamMap.subscribe((params) => {
-      this.selectedCategory = params.get('category') ?? '';
+      this.selectedCategory = this.toSlug(params.get('category') ?? '');
     });
-
-    if (this.route.snapshot.queryParamMap.has('category')) {
-      this.router.navigate(['/'], { fragment: 'products', replaceUrl: true });
-    }
   }
 
   ngAfterViewInit(): void {
@@ -66,7 +62,11 @@ export class CategoryComponent implements OnInit, AfterViewInit, OnDestroy {
 
   toggleCategory(category: string): void {
     const categoryQuery = this.selectedCategory === category ? {} : { category };
-    this.router.navigate(['/'], { queryParams: categoryQuery, fragment: 'products' });
+    this.router.navigate(['/'], { queryParams: categoryQuery });
+  }
+
+  private toSlug(value: string): string {
+    return value.trim().toLowerCase().replace(/\s+/g, '-');
   }
 
   @HostListener('window:resize')

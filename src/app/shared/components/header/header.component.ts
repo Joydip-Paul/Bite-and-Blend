@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SearchComponent } from "../search/search.component";
 import { CartService } from '../../services/cart.service';
@@ -11,9 +11,19 @@ import { CartService } from '../../services/cart.service';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  @ViewChild(SearchComponent) private searchComponent?: SearchComponent;
+
   cartOpen = false;
+  mobileSearchOpen = false;
 
   constructor(readonly cartService: CartService) {}
+
+  toggleMobileSearch(): void {
+    this.mobileSearchOpen = !this.mobileSearchOpen;
+    if (this.mobileSearchOpen) {
+      setTimeout(() => this.searchComponent?.focus());
+    }
+  }
 
   openCart(): void {
     this.cartOpen = true;
@@ -28,5 +38,6 @@ export class HeaderComponent {
   @HostListener('document:keydown.escape')
   onEscape(): void {
     if (this.cartOpen) this.closeCart();
+    if (this.mobileSearchOpen) this.mobileSearchOpen = false;
   }
 }

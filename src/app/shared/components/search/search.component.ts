@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -11,6 +11,8 @@ import { Subscription } from 'rxjs';
   styleUrl: './search.component.scss'
 })
 export class SearchComponent implements OnDestroy {
+  @ViewChild('searchInput') private searchInput?: ElementRef<HTMLInputElement>;
+
   searchText = '';
   private searchTimer?: ReturnType<typeof setTimeout>;
   private querySubscription: Subscription;
@@ -45,5 +47,9 @@ export class SearchComponent implements OnDestroy {
   clearSearch(): void {
     this.searchText = '';
     this.searchProduct();
+  }
+
+  focus(): void {
+    this.searchInput?.nativeElement.focus();
   }
 }

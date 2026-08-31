@@ -15,7 +15,12 @@
             Explore All Products
           }
         </h2>
-        <p>{{ filteredProducts.length }} delicious item{{ filteredProducts.length === 1 ? '' : 's' }} available</p>
+        <p>
+          {{ filteredProducts.length }} delicious item{{
+            filteredProducts.length === 1 ? '' : 's'
+          }}
+          available
+        </p>
       </div>
 
       @if (searchTerm || selectedCategory) {
@@ -31,20 +36,23 @@
               @if (product.featured) {
                 <span class="popular-badge">Popular</span>
               }
-              <img [src]="product.image" [alt]="product.name" loading="lazy">
+              <img [src]="product.image" [alt]="product.name" loading="lazy" />
             </div>
 
             <div class="product-info">
-              <span class="product-category">{{ product.category }}</span>
-              <h3>{{ product.name }}</h3>
-              <p>{{ product.description }}</p>
+              <div class="product-top">
+                <span class="product-category">{{ product.category }}</span>
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.description }}</p>
+              </div>
               <div class="product-bottom">
                 <strong><small>Tk</small> {{ product.price }}</strong>
                 <button
                   type="button"
                   class="add-button"
                   [attr.aria-label]="'Add ' + product.name + ' to cart'"
-                  (click)="addToCart(product)">
+                  (click)="addToCart(product)"
+                >
                   <span aria-hidden="true">+</span> Add
                 </button>
               </div>

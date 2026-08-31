@@ -4,7 +4,30 @@
       <a routerLink="/" class="logo"><img src="assets/img/main-logo.jpg" alt="Bite & Blend"></a>
 
       <div class="header-actions">
-        <app-search></app-search>
+        <button
+          type="button"
+          class="mobile-search-toggle"
+          [class.mobile-search-toggle--open]="mobileSearchOpen"
+          [attr.aria-expanded]="mobileSearchOpen"
+          aria-controls="mobile-search-panel"
+          aria-label="Toggle search"
+          (click)="toggleMobileSearch()"
+        >
+          @if (mobileSearchOpen) {
+            <span aria-hidden="true">×</span>
+          } @else {
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M10 2a8 8 0 105.29 14l5.35 5.35 1.42-1.42-5.35-5.35A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/>
+            </svg>
+          }
+        </button>
+        <div
+          id="mobile-search-panel"
+          class="search-panel"
+          [class.search-panel--open]="mobileSearchOpen"
+        >
+          <app-search></app-search>
+        </div>
         <button type="button" class="cart" aria-label="Open shopping cart" (click)="openCart()">
           <img src="assets/icons/cart.svg" alt="">
           @if (cartService.itemCount()) {

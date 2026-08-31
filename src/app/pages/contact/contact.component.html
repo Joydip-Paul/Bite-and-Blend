@@ -6,14 +6,14 @@
       <aside>
         <span>Come say hello</span><h2>Visit or reach us directly</h2>
         <div class="contact-method"><i>⌖</i><div><small>Our location</small><strong>Chunarughat, Habiganj</strong></div></div>
-        <div class="contact-method"><i>☎</i><div><small>Call us</small><a href="tel:+8801XXXXXXXXX">+880 1XXXXXXXXX</a></div></div>
+        <div class="contact-method"><i>☎</i><div><small>Call us</small><a href="tel:+8801759696957">+880 1759-696957</a></div></div>
         <div class="contact-method"><i>✉</i><div><small>Email us</small><a href="mailto:hello@biteandblend.com">hello@biteandblend.com</a></div></div>
         <div class="hours"><small>Opening hours</small><strong>Every day</strong><span>10:00 AM — 10:00 PM</span></div>
       </aside>
 
       <div class="contact-form-card">
         <span>Send a message</span><h2>How can we help?</h2>
-        @if (submitted) { <div class="sent-message" role="status">✓ Thank you! Your message was submitted and logged successfully.</div> }
+        @if (submitted) { <div class="sent-message" role="status">✓ WhatsApp opened with your message. Press Send there to contact us.</div> }
         <form [formGroup]="contactForm" (ngSubmit)="submitMessage()" novalidate>
           <div class="field-row">
             <label><span>Your name</span><input type="text" formControlName="name" placeholder="Full name" autocomplete="name">@if (contactForm.controls.name.touched && contactForm.controls.name.invalid) { <small>Please enter your name.</small> }</label>

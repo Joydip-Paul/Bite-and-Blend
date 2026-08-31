@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { WhatsAppService } from '../../shared/services/whatsapp.service';
 
 @Component({
   selector: 'app-contact',
@@ -12,7 +13,7 @@ export class ContactComponent {
   submitted = false;
   readonly contactForm;
 
-  constructor(formBuilder: FormBuilder) {
+  constructor(formBuilder: FormBuilder, private whatsapp: WhatsAppService) {
     this.contactForm = formBuilder.nonNullable.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       phone: ['', [Validators.required, Validators.pattern(/^(\+?88)?01[3-9]\d{8}$/)]],
@@ -26,7 +27,17 @@ export class ContactComponent {
       return;
     }
 
-    console.log('Bite & Blend contact message:', this.contactForm.getRawValue());
+    const contactData = this.contactForm.getRawValue();
+    const message = [
+      '*New Bite & Blend Contact Message*',
+      '',
+      `*Name:* ${contactData.name}`,
+      `*Phone:* ${contactData.phone}`,
+      `*Message:* ${contactData.message}`,
+    ].join('\n');
+
+    console.log('Bite & Blend contact message:', contactData);
+    this.whatsapp.send(message);
     this.submitted = true;
     this.contactForm.reset();
   }

@@ -6,17 +6,17 @@
       <p>Share your delivery details and we’ll prepare everything fresh.</p>
     </div>
 
-    @if (cartService.items().length) {
+    @if (orderComplete) {
+      <div class="order-complete" role="status">
+        <span>✓</span>
+        <h2>Your order is ready to send!</h2>
+        <p>WhatsApp has opened with your order details. Please press Send there to confirm your order.</p>
+        <a routerLink="/" fragment="products">Continue shopping</a>
+      </div>
+    } @else if (cartService.items().length) {
       <div class="checkout-layout">
         <div class="form-card">
           <div class="card-title"><i>01</i><div><span>Customer details</span><h2>Where should we deliver?</h2></div></div>
-
-          @if (submitted && orderForm.valid) {
-            <div class="success-message" role="status">
-              <span>✓</span>
-              <div><strong>Order information submitted!</strong><p>Your complete order data is available in the browser console.</p></div>
-            </div>
-          }
 
           <form [formGroup]="orderForm" (ngSubmit)="submitOrder()" novalidate>
             <div class="field-row">
